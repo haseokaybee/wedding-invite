@@ -11,25 +11,20 @@ import {
   serverTimestamp
 } from "firebase/firestore";
 
-export default function Wishes() {
+export default function Wishes({ showForm = true, showList = true }) {
   const [wishes, setWishes] = useState([]);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
 
-  /* ===============================
-     🔥 REALTIME LISTENER
-  =============================== */
+  /* 🔥 REALTIME LISTENER */
   useEffect(() => {
-    const q = query(
-      collection(db, "wishes"),
-      orderBy("createdAt", "desc")
-    );
+    const q = query(collection(db, "wishes"), orderBy("createdAt", "desc"));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const list = snapshot.docs.map((doc) => ({
         id: doc.id,
-        ...doc.data()
+        ...doc.data(),
       }));
       setWishes(list);
     });
@@ -37,9 +32,7 @@ export default function Wishes() {
     return () => unsubscribe();
   }, []);
 
-  /* ===============================
-     🔥 SUBMIT WISH
-  =============================== */
+  /* 🔥 SUBMIT WISH */
   const submit = async (e) => {
     e.preventDefault();
 
@@ -51,7 +44,7 @@ export default function Wishes() {
     await addDoc(collection(db, "wishes"), {
       name: name || "Guest",
       message,
-      createdAt: serverTimestamp()
+      createdAt: serverTimestamp(),
     });
 
     setName("");
@@ -68,48 +61,52 @@ export default function Wishes() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      {/* FORM */}
-      <form onSubmit={submit}>
-        <label>Name</label>
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Your name (optional)"
-        />
+      {/* =============================== FORM =============================== */}
+      {showForm && (
+        <form onSubmit={submit}>
+          <label>Name</label>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Your name (optional)"
+          />
 
-        <label>Your Wish*</label>
-        <textarea
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Write something..."
-        />
+          <label>Your Wish*</label>
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="Write something..."
+          />
 
-        <button type="submit" className="primary-button">
-          Send Wish 💌
-        </button>
+          <button type="submit" className="primary-button">
+            Send Wish 💌
+          </button>
 
-        {status && <p className="form-status">{status}</p>}
-      </form>
+          {status && <p className="form-status">{status}</p>}
+        </form>
+      )}
 
-      {/* WISH CARDS */}
-      <div className="wishes-list">
-        <AnimatePresence>
-          {wishes.map((w) => (
-            <motion.div
-              key={w.id}
-              layout
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.85 }}
-              transition={{ duration: 0.3 }}
-              className="wish-card"
-            >
-              <p className="wish-message">“{w.message}”</p>
-              <p className="wish-name">– {w.name}</p>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
+      {/* =============================== LIST =============================== */}
+      {showList && (
+        <div className="wishes-list">
+          <AnimatePresence>
+            {wishes.map((w) => (
+              <motion.div
+                key={w.id}
+                layout
+                initial={{ opacity: 0, scale: 0.85 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.85 }}
+                transition={{ duration: 0.3 }}
+                className="wish-card"
+              >
+                <p className="wish-message">“{w.message}”</p>
+                <p className="wish-name">– {w.name}</p>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      )}
     </motion.div>
   );
 }

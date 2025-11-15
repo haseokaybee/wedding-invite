@@ -82,132 +82,158 @@ export default function App() {
     setPlayAudio(true);
   };
 
-  /* =====================================================
-     MAIN LAYOUT
-  ===================================================== */
-  return (
-    <div className="fixed-viewport-wrapper">
-      <div className="fixed-viewport">
-        
-        <BackgroundMusicVideo playAudio={playAudio} />
+/* =====================================================
+   MAIN LAYOUT
+===================================================== */
+return (
+  <div className="fixed-viewport-wrapper">
+    <div className="fixed-viewport">
 
-        <AnimatePresence mode="wait">
-          {!isOpened ? (
-            /* ================= INTRO SCREEN ================= */
+      {/* BACKGROUND MUSIC */}
+      <BackgroundMusicVideo playAudio={playAudio} />
+
+      <AnimatePresence mode="wait">
+        {!isOpened ? (
+          /* ================= INTRO SCREEN ================= */
+          <motion.div
+            key="intro"
+            initial={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.25 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{
+              width: "390px",
+              height: "844px",
+              overflow: "hidden",
+            }}
+          >
+            <IntroScreen onOpen={openInvitation} />
+          </motion.div>
+        ) : (
+          /* ================= MAIN CONTENT ================= */
+          <motion.div
+            key="main"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{
+              width: "100%",
+              maxWidth: "430px",
+              minHeight: "844px",
+              overflowY: "auto",
+              padding: "0",
+              position: "relative",
+            }}
+          >
+            {/* HERO */}
+            <HeroSection />
+
+            {/* SALAM IMAGE */}
             <motion.div
-              key="intro"
-              initial={{ opacity: 1, scale: 1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.25 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              style={{
-                width: "390px",
-                height: "844px",
-                overflow: "hidden",
-              }}
-            >
-              <IntroScreen onOpen={openInvitation} />
-            </motion.div>
-          ) : (
-            /* ================= MAIN CONTENT ================= */
-            <motion.div
-              key="main"
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
               style={{
                 width: "100%",
-                maxWidth: "430px",
-                minHeight: "844px",
-                overflowY: "auto",
-                padding: "0",
-                position: "relative",
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "1px",
+                marginBottom: "1px",
               }}
             >
-              {/* HERO */}
-              <HeroSection />
+              <img
+                src="/salam.png"
+                alt="Assalamualaikum"
+                style={{
+                  width: "90%",
+                  maxWidth: "200px",
+                  opacity: 0.95,
+                }}
+              />
+            </motion.div>
 
-              {/* SALAM IMAGE */}
-              <motion.div
+            {/* INVITATION PARAGRAPH */}
+            <InvitationText />
+
+            {/* COUNTDOWN + TITLE */}
+            <div style={{ marginTop: "28px", textAlign: "center" }}>
+              <motion.h2
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
                 style={{
-                  width: "100%",
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "1px",
-                  marginBottom: "1px",
+                  fontFamily: "'Cinzel', serif",
+                  fontSize: "1.25rem",
+                  letterSpacing: "0.06em",
+                  marginBottom: "12px",
+                  color: "#6d5959",
                 }}
               >
-                <img
-                  src="/salam.png"
-                  alt="Assalamualaikum"
-                  style={{
-                    width: "90%",
-                    maxWidth: "200px",
-                    opacity: 0.95,
-                  }}
-                />
-              </motion.div>
+                MENGHITUNG HARI
+              </motion.h2>
 
-              {/* INVITATION PARAGRAPH */}
-              <InvitationText />
+              <Countdown targetDate="2025-12-28T08:00:00" />
+            </div>
 
-              {/* COUNTDOWN + TITLE */}
-              <div style={{ marginTop: "28px", textAlign: "center" }}>
-                <motion.h2
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  style={{
-                    fontFamily: "'Cinzel', serif",
-                    fontSize: "1.25rem",
-                    letterSpacing: "0.06em",
-                    marginBottom: "12px",
-                    color: "#6d5959",
-                  }}
-                >
-                  MENGHITUNG HARI
-                </motion.h2>
+            {/* ⭐ UCAPAN LIST BELOW COUNTDOWN (view only, no form) */}
+            <div style={{ marginTop: "32px" }}>
+              <h2
+                style={{
+                  textAlign: "center",
+                  fontFamily: "'Cinzel', serif",
+                  letterSpacing: "0.04em",
+                }}
+              >
+                Ucapan
+              </h2>
 
-                <Countdown targetDate="2025-12-28T08:00:00" />
-              </div>
+              <Wishes showForm={false} />
+            </div>
 
-              <div style={{ height: "60px" }} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+            {/* spacing before bottom menu */}
+            <div style={{ height: "80px" }} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
+      {/* =====================================================
+         MODALS
+      ===================================================== */}
+      <Modal open={openRSVP} onClose={() => setOpenRSVP(false)}>
+        <h2 className="cinzel" style={{ textAlign: "center" }}>RSVP</h2>
+        <RSVPForm onSubmit={handleRsvpSubmit} />
+      </Modal>
+
+<Modal open={openWishes} onClose={() => setOpenWishes(false)}>
+  <h2 className="cinzel" style={{ textAlign: "center" }}>Ucapan</h2>
+
+  {/* ONLY SHOW THE ENTRY FORM INSIDE MODAL */}
+  <Wishes showForm={true} showList={false} />
+</Modal>
+
+      <Modal open={openLocation} onClose={() => setOpenLocation(false)}>
+        <h2 className="cinzel" style={{ textAlign: "center" }}>Lokasi</h2>
+        <p style={{ textAlign: "center" }}>Lokasi akan ditambah kemudian.</p>
+      </Modal>
+
+      {/* =====================================================
+         BOTTOM MENU (only after card opened)
+      ===================================================== */}
+      {isOpened && (
+        <BottomMenu
+          onOpenRSVP={() => setOpenRSVP(true)}
+          onOpenWishes={() => setOpenWishes(true)}
+          onOpenLocation={() => setOpenLocation(true)}
+        />
+      )}
+
+    </div>
+  </div>
+);
+
+
+}
         
 
-        {/* ================ MODALS ================ */}
-        <Modal open={openRSVP} onClose={() => setOpenRSVP(false)}>
-          <h2 className="cinzel" style={{ textAlign: "center" }}>RSVP</h2>
-          <RSVPForm onSubmit={handleRsvpSubmit} />
-        </Modal>
-
-        <Modal open={openWishes} onClose={() => setOpenWishes(false)}>
-          <h2 className="cinzel" style={{ textAlign: "center" }}>Ucapan</h2>
-          <Wishes />
-        </Modal>
-
-        <Modal open={openLocation} onClose={() => setOpenLocation(false)}>
-          <h2 className="cinzel" style={{ textAlign: "center" }}>Lokasi</h2>
-          <p style={{ textAlign: "center" }}>Lokasi akan ditambah kemudian.</p>
-        </Modal>
-
-        {/* ================ BOTTOM MENU ================ */}
-   {isOpened && (
-  <BottomMenu
-    onOpenRSVP={() => setOpenRSVP(true)}
-    onOpenWishes={() => setOpenWishes(true)}
-  />
-)}
-
-      </div>
-    </div>
-  );
-}
