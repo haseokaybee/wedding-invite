@@ -53,7 +53,7 @@ export default function InvitationText() {
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       style={{
-        marginTop: "28px",
+        marginTop: "1px",
         padding: "24px 20px",
         borderRadius: "20px",
         textAlign: "center",
@@ -79,17 +79,20 @@ export default function InvitationText() {
       {/* Malay Paragraph */}
      <p
   style={{
-    fontSize: "0.97rem",
+  fontSize: "0.97rem",
     color: "#7a5c5c",
     lineHeight: "1.65",
     marginBottom: "16px",
     fontFamily: "'Times New Roman', serif",
+    overflowWrap: "break-word",
+    wordBreak: "normal",
+    whiteSpace: "pre-wrap",
   }}
 >
   <TypewriterText
     delay={0.4}
     text={
-      "Dengan penuh rasa syukur, kami menjemput kehadiran tuan/puan ke majlis perkahwinan kami bagi meraikan hari bermakna ini."
+      "Dengan segala hormat menjemput Dato'/Datin/ Tuan/Puan/Encik/Cik ke Majlis Pertunangan Puteri Kami."
     }
   />
 </p>
@@ -97,19 +100,44 @@ export default function InvitationText() {
       {/* English Paragraph */}
       <p
   style={{
-    fontSize: "0.97rem",
+    fontFamily: "Cinzel",
+     fontSize: "0.97rem",
     color: "#7a5c5c",
     lineHeight: "1.65",
-    fontFamily: "'Times New Roman', serif",
+    marginBottom: "16px",
+    overflowWrap: "break-word",
+    wordBreak: "normal",
+    whiteSpace: "pre-wrap",
   }}
 >
   <TypewriterText
     delay={3.2}
     text={
-      "With heartfelt joy, we invite you to witness and celebrate the beautiful union of our love as we begin our journey together."
+      "FARAH WAHIDA BINTI AMRAN"
     }
   />
 </p>
+
+<p
+  style={{
+    fontFamily: "Cinzel",
+     fontSize: "0.97rem",
+    color: "#7a5c5c",
+    lineHeight: "1.65",
+    marginBottom: "16px",
+    overflowWrap: "break-word",
+    wordBreak: "normal",
+    whiteSpace: "pre-wrap",
+  }}
+>
+  <TypewriterText
+    delay={3.2}
+    text={
+      "AMEERUL MUKMIN BIN KHAIRUL ANUAR"
+    }
+  />
+</p>
+
     </motion.div>
   );
 }

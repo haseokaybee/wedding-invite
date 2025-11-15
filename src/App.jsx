@@ -119,6 +119,33 @@ export default function App() {
               {/* HERO SECTION */}
               <HeroSection />
 
+{/* ASSALAMUALAIKUM CALLIGRAPHY IMAGE */}
+<motion.div
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
+  style={{
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "1px",   // reduced from 20px → 12px
+    marginBottom: "1px", // nicely pulls InvitationText closer
+  }}
+>
+  <img
+    src="/salam.png"
+    alt="Assalamualaikum"
+    style={{
+      width: "90%",            // fits beautifully inside 390px
+      maxWidth: "200px",
+      opacity: 0.95,
+    }}
+  />
+</motion.div>
+
+
+
               {/* INVITATION PARAGRAPH */}
               <InvitationText />
 

@@ -66,31 +66,33 @@ export default function Countdown({ targetDate }) {
       }}
     >
       <div style={boxStyle}>
-        <div style={{ fontSize: "1.3rem", fontWeight: 600 }}>
-          {timeLeft.days}
-        </div>
-        <div style={{ fontSize: "0.75rem", color: "#7a5c5c" }}>Days</div>
-      </div>
+  <div style={{ fontSize: "1.3rem", fontWeight: 600, fontFamily: "Cinzel" }}>
+    {timeLeft.days}
+  </div>
+  <div style={{ fontSize: "0.75rem", color: "#7a5c5c", fontFamily: "Montserrat" }}>Hari
+  </div>
+    
+</div>
 
       <div style={boxStyle}>
-        <div style={{ fontSize: "1.3rem", fontWeight: 600 }}>
+        <div style={{ fontSize: "1.3rem", fontWeight: 600, fontFamily: "Cinzel" }}>
           {timeLeft.hours}
         </div>
-        <div style={{ fontSize: "0.75rem", color: "#7a5c5c" }}>Hours</div>
+        <div style={{ fontSize: "0.75rem", color: "#7a5c5c", fontFamily: "Montserrat" }}>Jam</div>
       </div>
 
       <div style={boxStyle}>
-        <div style={{ fontSize: "1.3rem", fontWeight: 600 }}>
+        <div style={{ fontSize: "1.3rem", fontWeight: 600, fontFamily: "Cinzel" }}>
           {timeLeft.minutes}
         </div>
-        <div style={{ fontSize: "0.75rem", color: "#7a5c5c" }}>Minutes</div>
+        <div style={{ fontSize: "0.75rem", color: "#7a5c5c", fontFamily: "Montserrat" }}>Minit</div>
       </div>
 
       <div style={boxStyle}>
-        <div style={{ fontSize: "1.3rem", fontWeight: 600 }}>
+        <div style={{ fontSize: "1.3rem", fontWeight: 600, fontFamily: "Cinzel" }}>
           {timeLeft.seconds}
         </div>
-        <div style={{ fontSize: "0.75rem", color: "#7a5c5c" }}>Seconds</div>
+        <div style={{ fontSize: "0.75rem", color: "#7a5c5c", fontFamily: "Montserrat"}}>Saat</div>
       </div>
     </div>
   );

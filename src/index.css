@@ -16,6 +16,11 @@
   font-family: 'Cinzel', serif;
 }
 
+.countdown-custom {
+  font-family: 'Times New Roman', serif !important;
+  letter-spacing: 0.03em;
+}
+
 *,
 *::before,
 *::after {
