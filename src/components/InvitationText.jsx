@@ -72,7 +72,7 @@ export default function InvitationText() {
         }}
       >
         NIZA BINTI GHANI
-        AMRAN BIN ABDUL RAHMANs
+        AMRAN BIN ABDUL RAHMAN
 
       </motion.h2>
 
