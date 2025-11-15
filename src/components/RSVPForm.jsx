@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function RSVPForm({ onSubmit }) {
+export default function RSVPForm() {
   const [form, setForm] = useState({
     name: "",
     attending: "yes",
@@ -9,6 +9,7 @@ export default function RSVPForm({ onSubmit }) {
     message: "",
   });
 
+  const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState("");
 
   const update = (e) => {
@@ -19,7 +20,7 @@ export default function RSVPForm({ onSubmit }) {
     }));
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
 
     if (!form.name.trim()) {
@@ -27,23 +28,46 @@ export default function RSVPForm({ onSubmit }) {
       return;
     }
 
-    const entry = {
-      ...form,
-      id: Date.now(),
-      createdAt: new Date().toISOString(),
-    };
+    setLoading(true);
+    setStatus("");
 
-    onSubmit(entry);
+  const endpoint =
+  "https://script.google.com/macros/s/AKfycbzwFXI9UBvFCnepBHsog3zQPtSlZHVORBB7yugHZhHH43AAqPytIeiFuHZ9QcZjk6eY/exec";
 
-    setForm({
-      name: "",
-      attending: "yes",
-      guests: 1,
-      message: "",
-    });
 
-    setStatus("Thank you for your RSVP! 💗");
-    setTimeout(() => setStatus(""), 3000);
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        mode: "no-cors", // ⭐ Required for Apps Script
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          attending: form.attending,
+          pax: form.guests,
+          message: form.message,
+          userAgent: navigator.userAgent,
+        }),
+      });
+
+      // ⭐ Because "no-cors" returns opaque response, we assume success
+      setStatus("Thank you! Your RSVP has been recorded 💗");
+
+      // Reset form
+      setForm({
+        name: "",
+        attending: "yes",
+        guests: 1,
+        message: "",
+      });
+    } catch (err) {
+      console.error("RSVP Submit Error:", err);
+      setStatus("Network error. Please try again.");
+    }
+
+    setLoading(false);
+    setTimeout(() => setStatus(""), 4000);
   };
 
   return (
@@ -74,15 +98,20 @@ export default function RSVPForm({ onSubmit }) {
       />
 
       <label>Message</label>
-      <textarea
-        name="message"
-        value={form.message}
-        onChange={update}
-      />
+      <textarea name="message" value={form.message} onChange={update} />
 
-      <button type="submit" className="primary-button">
-        Submit
-      </button>
+      <motion.button
+        type="submit"
+        className="primary-button"
+        disabled={loading}
+        whileTap={{ scale: loading ? 1 : 0.9 }}
+        style={{
+          opacity: loading ? 0.6 : 1,
+          cursor: loading ? "not-allowed" : "pointer",
+        }}
+      >
+        {loading ? "Submitting..." : "Submit"}
+      </motion.button>
 
       {status && (
         <motion.p

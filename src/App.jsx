@@ -12,6 +12,7 @@ import InvitationText from "./components/InvitationText.jsx";
 import BottomMenu from "./components/BottomMenu.jsx";
 import Modal from "./components/Modal.jsx";
 import ContactModal from "./components/ContactModal.jsx";
+import LocationModal from "./components/LocationModal.jsx";
 
 
 export default function App() {
@@ -51,6 +52,7 @@ export default function App() {
   const [openWishes, setOpenWishes] = useState(false);
   const [openLocation, setOpenLocation] = useState(false);
   const [openContact, setOpenContact] = useState(false);
+  
 
 
   /* =====================================================
@@ -247,6 +249,8 @@ return (
   </a>
 </Modal>
 
+<LocationModal open={openLocation} onClose={() => setOpenLocation(false)} />
+
       {/* =====================================================
          BOTTOM MENU (only after card opened)
       ===================================================== */}
@@ -256,6 +260,7 @@ return (
           onOpenWishes={() => setOpenWishes(true)}
           onOpenLocation={() => setOpenLocation(true)}
           onOpenContact={() => setOpenContact(true)}  
+           
           
         />
       )}

@@ -3,23 +3,21 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Heart, MapPin, Mail, Phone } from "lucide-react";
 
-export default function BottomMenu({ onOpenRSVP, onOpenWishes, onOpenContact }) {
-  const openMap = () => {
-    window.open(
-      "https://www.google.com/maps?daddr=6.004869,102.098801&saddr",
-      "_blank"
-    );
-  };
-
+export default function BottomMenu({
+  onOpenRSVP,
+  onOpenWishes,
+  onOpenContact,
+  onOpenLocation
+}) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 60 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.55, ease: "easeOut" }}
       style={{
-        position: "absolute",     // ⭐ FIX: absolute to follow the 390px viewport
+        position: "absolute",     // stays relative to your 390px viewport
         bottom: "20px",
-        left: "4%",
+        left: "4%",              // ⭐ FULL CENTER
         transform: "translateX(-50%)",
 
         width: "92%",
@@ -59,9 +57,9 @@ export default function BottomMenu({ onOpenRSVP, onOpenWishes, onOpenContact }) 
         <span style={labelStyle}>Ucapan</span>
       </motion.button>
 
-      {/* Lokasi */}
+      {/* Lokasi — ⭐ NOW OPENS MODAL INSTEAD OF LINK */}
       <motion.button
-        onClick={openMap}
+        onClick={onOpenLocation}
         style={btnStyle}
         whileTap={{ scale: 0.88 }}
       >
@@ -69,7 +67,7 @@ export default function BottomMenu({ onOpenRSVP, onOpenWishes, onOpenContact }) 
         <span style={labelStyle}>Lokasi</span>
       </motion.button>
 
-      {/* ⭐ Contact Button (NEW) */}
+      {/* Contact */}
       <motion.button
         onClick={onOpenContact}
         style={btnStyle}
@@ -90,7 +88,7 @@ const btnStyle = {
   background: "transparent",
   border: "none",
   cursor: "pointer",
-  padding: "6px 12px", // better tap area
+  padding: "6px 12px",
   borderRadius: "12px",
 };
 
