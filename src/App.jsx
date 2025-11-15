@@ -109,11 +109,12 @@ export default function App() {
               exit={{ opacity: 0, scale: 1.1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               style={{
-                width: "390px",
-                height: "844px",
-                overflowY: "auto",
-                padding: "16px",
-                position: "relative",
+                width: "100%",             // expand full width
+  maxWidth: "430px",         // safe for iPhone Pro Max
+  minHeight: "844px",
+  overflowY: "auto",
+  padding: "0",              // remove padding
+  position: "relative",
               }}
             >
               {/* HERO SECTION */}
@@ -150,8 +151,23 @@ export default function App() {
               <InvitationText />
 
               {/* COUNTDOWN */}
-              <div style={{ marginTop: "24px" }}>
-                <Countdown targetDate="2025-12-28T08:00:00" />
+            <div style={{ marginTop: "28px", textAlign: "center" }}>
+  <motion.h2
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    style={{
+      fontFamily: "'Cinzel', serif",
+      fontSize: "1.25rem",
+      letterSpacing: "0.06em",
+      marginBottom: "12px",
+      color: "#6d5959",
+    }}
+  >
+    MENGHITUNG HARI
+  </motion.h2>
+
+  <Countdown targetDate="2025-12-28T08:00:00" />
               </div>
 
               {/* RSVP SECTION */}

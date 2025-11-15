@@ -50,14 +50,16 @@ export default function HeroSection() {
             color: "#d58fa6",
           }}
         >
-          20 • 12 • 2025
+          28 • 12 • 2025
         </p>
 
         <p
           style={{
+            fontFamily: "Montserrat",
             marginTop: "8px",
             fontSize: "0.95rem",
             color: "#7a5c5c",
+            
           }}
         >
           Pasir Mas, Kelantan

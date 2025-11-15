@@ -6,40 +6,46 @@ import { motion } from "framer-motion";
    TYPEWRITER FIX — THIS IS THE PART YOU REPLACE
 =============================================== */
 const TypewriterText = ({ text, delay = 0 }) => {
-  const letters = Array.from(text);
+  const words = text.split(" "); // animate per WORD instead of letter
 
   return (
     <motion.span
-      style={{ display: "inline-block", whiteSpace: "normal" }}
+      style={{
+        display: "inline",
+        whiteSpace: "pre-wrap",
+        lineHeight: "1.7",
+      }}
       initial="hidden"
       animate="visible"
       variants={{
         visible: {
           transition: {
-            staggerChildren: 0.03,
+            staggerChildren: 0.15, // slower, smoother word-by-word
             delay: delay,
           },
         },
       }}
     >
-      {letters.map((letter, i) => (
+      {words.map((word, i) => (
         <motion.span
           key={i}
           style={{
-            display: "inline-block", // allows wrapping naturally
-            whiteSpace: "pre-wrap",  // preserves spacing + allows wrap
+            display: "inline-block",
+            marginRight: "4px",
+            whiteSpace: "pre-wrap",
           }}
           variants={{
-            hidden: { opacity: 0 },
-            visible: { opacity: 1 },
+            hidden: { opacity: 0, y: 2 },
+            visible: { opacity: 1, y: 0 },
           }}
         >
-          {letter}
+          {word}
         </motion.span>
       ))}
     </motion.span>
   );
 };
+
 
 /* ============================================
    INVITATION COMPONENT
@@ -63,17 +69,17 @@ export default function InvitationText() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.6 }}
-        style={{
-          fontFamily: "'Cinzel', serif",
-          letterSpacing: "0.05em",
-          marginBottom: "16px",
-          fontSize: "1.35rem",
-          textTransform: "uppercase",
-        }}
-      >
-        NIZA BINTI GHANI
-        &
-        AMRAN BIN ABDUL RAHMAN
+    className="cinzel"
+  style={{
+    fontSize: "1.1rem",
+    letterSpacing: "0.05em",
+    marginBottom: "16px",
+    textAlign: "center",
+    lineHeight: "1.4",
+    whiteSpace: "pre-line",
+  }}
+>
+  {"NIZA BINTI GHANI\n&\nAMRAN BIN ABDUL RAHMAN"}
 
       </motion.h2>
 
@@ -98,46 +104,46 @@ export default function InvitationText() {
   />
 </p>
 
-      {/* English Paragraph */}
-      <p
+      {/* FARAH */}
+      <h3
+    className="cinzel"
   style={{
-    fontFamily: "Cinzel",
-     fontSize: "0.97rem",
-    color: "#7a5c5c",
-    lineHeight: "1.65",
+    fontSize: "1.1rem",
+    letterSpacing: "0.05em",
     marginBottom: "16px",
-    overflowWrap: "break-word",
-    wordBreak: "normal",
-    whiteSpace: "pre-wrap",
+    textAlign: "center",
+    lineHeight: "1.4",
+    whiteSpace: "pre-line",
   }}
 >
+  
   <TypewriterText
     delay={3.2}
     text={
       "FARAH WAHIDA BINTI AMRAN"
     }
   />
-</p>
+</h3>
 
-<p
+<h4
+     className="cinzel"
   style={{
-    fontFamily: "Cinzel",
-     fontSize: "0.97rem",
-    color: "#7a5c5c",
-    lineHeight: "1.65",
+    fontSize: "1.1rem",
+    letterSpacing: "0.05em",
     marginBottom: "16px",
-    overflowWrap: "break-word",
-    wordBreak: "normal",
-    whiteSpace: "pre-wrap",
+    textAlign: "center",
+    lineHeight: "1.4",
+    whiteSpace: "pre-line",
   }}
 >
+  
   <TypewriterText
     delay={3.2}
     text={
-      "AMEERUL MUKMIN BIN KHAIRUL ANUAR"
+      "AMEERUL MUKMIN BINTI KHAIRUL ANUAR"
     }
   />
-</p>
+</h4>
 
     </motion.div>
   );
