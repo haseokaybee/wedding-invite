@@ -1,9 +1,9 @@
 // BottomMenu.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import { Heart, MapPin, Mail } from "lucide-react";
+import { Heart, MapPin, Mail, Phone } from "lucide-react";
 
-export default function BottomMenu({ onOpenRSVP, onOpenWishes }) {
+export default function BottomMenu({ onOpenRSVP, onOpenWishes, onOpenContact }) {
   const openMap = () => {
     window.open(
       "https://www.google.com/maps?daddr=6.004869,102.098801&saddr",
@@ -13,24 +13,25 @@ export default function BottomMenu({ onOpenRSVP, onOpenWishes }) {
 
   return (
     <motion.div
-      initial={{ y: 80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.45, ease: "easeOut" }}
+      initial={{ opacity: 0, y: 60 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55, ease: "easeOut" }}
       style={{
-        position: "fixed",                 // ⭐ Fixed to screen
-        bottom: "20px",                    // Lift above screen bottom
-        left: "50%",                       // ⭐ Perfect center horizontally
+        position: "absolute",     // ⭐ FIX: absolute to follow the 390px viewport
+        bottom: "20px",
+        left: "4%",
         transform: "translateX(-50%)",
 
-        width: "92%",                      // ⭐ Wider menu
-        maxWidth: "430px",                 // fits iPhone Pro Max beautifully
+        width: "92%",
+        maxWidth: "430px",
 
-        background: "rgba(255, 255, 255, 0.55)", // ⭐ Transparent glass
-        backdropFilter: "blur(12px)",
+        background: "rgba(255, 255, 255, 0.55)",
+        backdropFilter: "blur(14px)",
+        WebkitBackdropFilter: "blur(14px)",
 
-        padding: "16px 24px",
+        padding: "16px 20px",
         borderRadius: "26px",
-        boxShadow: "0 12px 28px rgba(0,0,0,0.12)",
+        boxShadow: "0 12px 32px rgba(0,0,0,0.15)",
 
         display: "flex",
         justifyContent: "space-around",
@@ -39,33 +40,58 @@ export default function BottomMenu({ onOpenRSVP, onOpenWishes }) {
       }}
     >
       {/* RSVP */}
-      <button onClick={onOpenRSVP} style={btnStyle}>
+      <motion.button
+        onClick={onOpenRSVP}
+        style={btnStyle}
+        whileTap={{ scale: 0.88 }}
+      >
         <Mail size={22} color="#5a4a4a" />
         <span style={labelStyle}>RSVP</span>
-      </button>
+      </motion.button>
 
       {/* Ucapan */}
-      <button onClick={onOpenWishes} style={btnStyle}>
+      <motion.button
+        onClick={onOpenWishes}
+        style={btnStyle}
+        whileTap={{ scale: 0.88 }}
+      >
         <Heart size={22} color="#c94a6a" />
         <span style={labelStyle}>Ucapan</span>
-      </button>
+      </motion.button>
 
-      {/* Location */}
-      <button onClick={openMap} style={btnStyle}>
+      {/* Lokasi */}
+      <motion.button
+        onClick={openMap}
+        style={btnStyle}
+        whileTap={{ scale: 0.88 }}
+      >
         <MapPin size={22} color="#5a4a4a" />
         <span style={labelStyle}>Lokasi</span>
-      </button>
+      </motion.button>
+
+      {/* ⭐ Contact Button (NEW) */}
+      <motion.button
+        onClick={onOpenContact}
+        style={btnStyle}
+        whileTap={{ scale: 0.88 }}
+      >
+        <Phone size={22} color="#5a4a4a" />
+        <span style={labelStyle}>Contact</span>
+      </motion.button>
     </motion.div>
   );
 }
 
+// Styles
 const btnStyle = {
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  background: "transparent",  // transparent button
+  background: "transparent",
   border: "none",
   cursor: "pointer",
+  padding: "6px 12px", // better tap area
+  borderRadius: "12px",
 };
 
 const labelStyle = {

@@ -4,64 +4,71 @@ import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
-  <section style={{ paddingBottom: "24px" }}>
-  <motion.div
-    style={{
-      background: "linear-gradient(135deg, #ffeef6, #ffffff)",
-      borderRadius: "28px",
-      padding: "32px 16px",  // reduced padding for more width inside
-      textAlign: "center",
-      boxShadow: "0 18px 40px rgba(0,0,0,0.06)",
-      border: "1px solid rgba(255,255,255,0.7)",
-      position: "relative",
-      overflow: "hidden",
-
-      // NEW — make the card wider
-      width: "100%",
-      maxWidth: "390px",
-      margin: "0 auto",
-      boxSizing: "border-box",
-    }}
-    initial={{ opacity: 0, y: -40 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-  >
-    <p
+    <section
       style={{
-        letterSpacing: "0.18em",
-        fontSize: "0.75rem",
-        textTransform: "uppercase",
-        color: "#7a5c5c",
+        width: "100vw",          // full screen width
+        height: "100vh",         // full screen height (1080x1920 effect)
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 0,
+        margin: 0,
+        overflow: "hidden",
       }}
     >
-      UNDANGAN MAJLIS PERTUNANGAN
-    </p>
+      <motion.div
+        style={{
+          background: "linear-gradient(135deg, #ffeef6, #ffffff)",
+          borderRadius: "32px",
+          padding: "48px 24px",
+          textAlign: "center",
+          boxShadow: "0 18px 40px rgba(0,0,0,0.07)",
+          border: "1px solid rgba(255,255,255,0.7)",
 
-    <h1
-      style={{
-        fontFamily: "'Cinzel', serif",
-        fontSize: "2rem",
-        color: "#3c2b2b",
-        marginTop: "12px",
-        lineHeight: "1.3",
-      }}
-    >
-      Farah &<br />Ameerul
-    </h1>
+          // Keep your content max width 390 but centered FULLSCREEN
+          width: "100%",
+          maxWidth: "390px",
+          boxSizing: "border-box",
+        }}
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <p
+          style={{
+            letterSpacing: "0.18em",
+            fontSize: "0.75rem",
+            textTransform: "uppercase",
+            color: "#7a5c5c",
+          }}
+        >
+          UNDANGAN MAJLIS PERTUNANGAN
+        </p>
 
-    <p
-      style={{
-        marginTop: "14px",
-        fontSize: "0.9rem",
-        color: "#7a5c5c",
-      }}
-    >
-      28 • 12 • 2025
-      <br />
-      Pasir Mas, Kelantan
-    </p>
-  </motion.div>
-</section>
+        <h1
+          style={{
+            fontFamily: "'Cinzel', serif",
+            fontSize: "2.5rem",
+            color: "#3c2b2b",
+            marginTop: "12px",
+            lineHeight: "1.25",
+          }}
+        >
+          Farah &<br />Ameerul
+        </h1>
 
+        <p
+          style={{
+            marginTop: "16px",
+            fontSize: "1rem",
+            color: "#7a5c5c",
+          }}
+        >
+          28 • 12 • 2025
+          <br />
+          Pasir Mas, Kelantan
+        </p>
+      </motion.div>
+    </section>
   );
 }

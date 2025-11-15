@@ -140,7 +140,7 @@ export default function InvitationText() {
   <TypewriterText
     delay={3.2}
     text={
-      "AMEERUL MUKMIN BINTI KHAIRUL ANUAR"
+      "AMEERUL MUKMIN BIN KHAIRUL ANUAR"
     }
   />
 </h4>

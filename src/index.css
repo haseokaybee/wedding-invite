@@ -515,7 +515,7 @@ body {
 
 .menu-btn {
   border: none;
-  background: rgba(105, 85, 85, 0.7);
+  background: rgba(255,255,255,0.7);
   padding: 8px 10px;
   border-radius: 12px;
   backdrop-filter: blur(8px);
@@ -526,4 +526,9 @@ body {
 }
 .menu-btn:active {
   transform: scale(0.95);
+}
+
+.main-scroll-area {
+  padding-bottom: 130px; /* leaves space for bottom menu */
+  -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
 }

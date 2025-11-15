@@ -68,6 +68,7 @@ export default function IntroScreen({ onOpen }) {
           fontWeight: 500,
           cursor: "pointer",
           boxShadow: "0 10px 25px rgba(213, 143, 166, 0.3)",
+          fontFamily: "Times New Roman"
         }}
       >
         ✨ Buka Kad ✨

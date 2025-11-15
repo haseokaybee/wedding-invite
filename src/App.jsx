@@ -11,6 +11,8 @@ import IntroScreen from "./components/IntroScreen.jsx";
 import InvitationText from "./components/InvitationText.jsx";
 import BottomMenu from "./components/BottomMenu.jsx";
 import Modal from "./components/Modal.jsx";
+import ContactModal from "./components/ContactModal.jsx";
+
 
 export default function App() {
   /* =====================================================
@@ -48,6 +50,8 @@ export default function App() {
   const [openRSVP, setOpenRSVP] = useState(false);
   const [openWishes, setOpenWishes] = useState(false);
   const [openLocation, setOpenLocation] = useState(false);
+  const [openContact, setOpenContact] = useState(false);
+
 
   /* =====================================================
      RSVP STATE (LOCAL SAFE)
@@ -111,21 +115,21 @@ return (
           </motion.div>
         ) : (
           /* ================= MAIN CONTENT ================= */
-          <motion.div
-            key="main"
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1.1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            style={{
-              width: "100%",
-              maxWidth: "430px",
-              minHeight: "844px",
-              overflowY: "auto",
-              padding: "0",
-              position: "relative",
-            }}
-          >
+         <motion.div
+  key="main"
+  initial={{ opacity: 0, scale: 0.85 }}
+  animate={{ opacity: 1, scale: 1 }}
+  exit={{ opacity: 0, scale: 1.1 }}
+  transition={{ duration: 0.8, ease: "easeOut" }}
+  className="main-scroll-area"
+  style={{
+    width: "100%",
+    maxWidth: "430px",
+    minHeight: "844px",
+    overflowY: "auto",
+    position: "relative",
+  }}
+>
             {/* HERO */}
             <HeroSection />
 
@@ -193,7 +197,7 @@ return (
             </div>
 
             {/* spacing before bottom menu */}
-            <div style={{ height: "80px" }} />
+            
           </motion.div>
         )}
       </AnimatePresence>
@@ -205,6 +209,8 @@ return (
         <h2 className="cinzel" style={{ textAlign: "center" }}>RSVP</h2>
         <RSVPForm onSubmit={handleRsvpSubmit} />
       </Modal>
+
+      <ContactModal open={openContact} onClose={() => setOpenContact(false)} />
 
 <Modal open={openWishes} onClose={() => setOpenWishes(false)}>
   <h2 className="cinzel" style={{ textAlign: "center" }}>Ucapan</h2>
@@ -249,6 +255,8 @@ return (
           onOpenRSVP={() => setOpenRSVP(true)}
           onOpenWishes={() => setOpenWishes(true)}
           onOpenLocation={() => setOpenLocation(true)}
+          onOpenContact={() => setOpenContact(true)}  
+          
         />
       )}
 

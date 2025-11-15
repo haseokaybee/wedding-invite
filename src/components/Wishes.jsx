@@ -50,7 +50,7 @@ export default function Wishes({ showForm = true, showList = true }) {
     setName("");
     setMessage("");
 
-    setStatus("Wish added 💌");
+    setStatus("Ucapan sudah dihantar 💌");
     setTimeout(() => setStatus(""), 1500);
   };
 
@@ -64,22 +64,22 @@ export default function Wishes({ showForm = true, showList = true }) {
       {/* =============================== FORM =============================== */}
       {showForm && (
         <form onSubmit={submit}>
-          <label>Name</label>
+          <label>Nama</label>
           <input
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Your name (optional)"
+            placeholder="Nama Anda"
           />
 
-          <label>Your Wish*</label>
+          <label>Ucapan Anda*</label>
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Write something..."
+            placeholder="Sila beri ucapan anda..."
           />
 
           <button type="submit" className="primary-button">
-            Send Wish 💌
+            Hantar 💌
           </button>
 
           {status && <p className="form-status">{status}</p>}
@@ -100,8 +100,10 @@ export default function Wishes({ showForm = true, showList = true }) {
                 transition={{ duration: 0.3 }}
                 className="wish-card"
               >
-                <p className="wish-message">“{w.message}”</p>
-                <p className="wish-name">– {w.name}</p>
+                <p className="wish-message" style={{ fontFamily: "Montserrat, italic" }}>  “{w.message}”
+</p>
+                <p className="wish-name" style={{ fontFamily: "Cinzel, serif" }}>  – {w.name}
+</p>
               </motion.div>
             ))}
           </AnimatePresence>
