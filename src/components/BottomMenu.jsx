@@ -76,7 +76,7 @@ export default function BottomMenu({ onOpenRSVP, onOpenWishes, onOpenContact }) 
         whileTap={{ scale: 0.88 }}
       >
         <Phone size={22} color="#5a4a4a" />
-        <span style={labelStyle}>Contact</span>
+        <span style={labelStyle}>Hubungi</span>
       </motion.button>
     </motion.div>
   );
