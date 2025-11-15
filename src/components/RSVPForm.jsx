@@ -31,36 +31,45 @@ export default function RSVPForm() {
     setLoading(true);
     setStatus("");
 
-  const endpoint =
-  "https://script.google.com/macros/s/AKfycbzwFXI9UBvFCnepBHsog3zQPtSlZHVORBB7yugHZhHH43AAqPytIeiFuHZ9QcZjk6eY/exec";
+    // 🔹 Build FormData to match Apps Script e.parameter
+    const formData = new FormData();
+    formData.append("name", form.name);
+    formData.append("attending", form.attending);
+    formData.append("guests", String(form.guests));
+    formData.append("message", form.message);
+    formData.append("userAgent", navigator.userAgent);
 
+    // 🔹 Your current Web App URL (update if you redeployed)
+    const endpoint =
+      "https://script.google.com/macros/s/AKfycbwHDwGN2YKhqARbLoN_I4_Of8zlhP9vkJEGWCP8GrcbmwaWjttmJB-Mu7yqxHLHDkGA/exec";
 
     try {
-      const response = await fetch(endpoint, {
+      const res = await fetch(endpoint, {
         method: "POST",
-        mode: "no-cors", // ⭐ Required for Apps Script
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: form.name,
-          attending: form.attending,
-          pax: form.guests,
-          message: form.message,
-          userAgent: navigator.userAgent,
-        }),
+        body: formData,
       });
 
-      // ⭐ Because "no-cors" returns opaque response, we assume success
-      setStatus("Thank you! Your RSVP has been recorded 💗");
+      // If CORS blocks reading JSON, res.type will be "opaque"
+      let ok = false;
+      if (res.type === "opaque") {
+        ok = true; // we assume success – Apps Script received the request
+      } else {
+        const data = await res.json().catch(() => ({}));
+        console.log("Server Response:", data);
+        ok = data.status === "success";
+      }
 
-      // Reset form
-      setForm({
-        name: "",
-        attending: "yes",
-        guests: 1,
-        message: "",
-      });
+      if (ok) {
+        setStatus("Thank you! Your RSVP has been recorded 💗");
+        setForm({
+          name: "",
+          attending: "yes",
+          guests: 1,
+          message: "",
+        });
+      } else {
+        setStatus("Something went wrong. Please try again.");
+      }
     } catch (err) {
       console.error("RSVP Submit Error:", err);
       setStatus("Network error. Please try again.");
