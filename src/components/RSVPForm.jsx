@@ -87,17 +87,17 @@ export default function RSVPForm() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       style={{ marginTop: "10px" }}
     >
-      <label>Name*</label>
+      <label>Nama*</label>
       <input name="name" value={form.name} onChange={update} required />
 
-      <label>Attendance</label>
+      <label>Kehadiran</label>
       <select name="attending" value={form.attending} onChange={update}>
         <option value="yes">Yes</option>
         <option value="no">No</option>
         <option value="maybe">Maybe</option>
       </select>
 
-      <label>Number of guests</label>
+      <label>Bilangan Ahli Keluarga</label>
       <input
         type="number"
         name="guests"
@@ -106,7 +106,7 @@ export default function RSVPForm() {
         onChange={update}
       />
 
-      <label>Message</label>
+      <label>Ucapan</label>
       <textarea name="message" value={form.message} onChange={update} />
 
       <motion.button

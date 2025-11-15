@@ -1,73 +1,92 @@
-// src/components/HeroSection.jsx
+// HeroSection.jsx
 import React from "react";
 import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
-    <section
-      style={{
-        width: "100vw",          // full screen width
-        height: "100vh",         // full screen height (1080x1920 effect)
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        padding: 0,
-        margin: 0,
-        overflow: "hidden",
-      }}
-    >
+    <section style={{ paddingBottom: "24px" }}>
       <motion.div
         style={{
-          background: "linear-gradient(135deg, #ffeef6, #ffffff)",
-          borderRadius: "32px",
-          padding: "48px 24px",
-          textAlign: "center",
-          boxShadow: "0 18px 40px rgba(0,0,0,0.07)",
-          border: "1px solid rgba(255,255,255,0.7)",
-
-          // Keep your content max width 390 but centered FULLSCREEN
-          width: "100%",
+          /* 🔥 EXACT 1080 × 1920 DESIGN SCALED TO 390 WIDTH */
+          width: "390px",
+          height: "690px", // 1080x1920 scaled to match width
           maxWidth: "390px",
-          boxSizing: "border-box",
+          margin: "0 auto",
+
+          /* 🔥 YOUR IMAGE */
+          backgroundImage: "url('/backgroundwebsite.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+
+          borderRadius: "28px",
+          position: "relative",
+          overflow: "hidden",
+          boxShadow: "0 18px 40px rgba(0,0,0,0.15)",
+          border: "1px solid rgba(255,255,255,0.5)",
         }}
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <p
+        {/* Dark overlay for readability */}
+        <div
           style={{
-            letterSpacing: "0.18em",
-            fontSize: "0.75rem",
-            textTransform: "uppercase",
-            color: "#7a5c5c",
+            position: "absolute",
+            inset: 0,
+            background: "rgba(0,0,0,0.35)",
           }}
-        >
-          UNDANGAN MAJLIS PERTUNANGAN
-        </p>
+        />
 
-        <h1
+        {/* TEXT CONTENT */}
+        <div
           style={{
-            fontFamily: "'Cinzel', serif",
-            fontSize: "2.5rem",
-            color: "#3c2b2b",
-            marginTop: "12px",
-            lineHeight: "1.25",
+            position: "relative",
+            zIndex: 2,
+            textAlign: "center",
+            top: "28%",
+            width: "100%",
+            padding: "0 20px",
           }}
         >
-          Farah &<br />Ameerul
-        </h1>
+          <p
+            style={{
+              letterSpacing: "0.18em",
+              fontSize: "0.75rem",
+              textTransform: "uppercase",
+              color: "#fff",
+              textShadow: "0 2px 8px rgba(0,0,0,0.4)",
+            }}
+          >
+            UNDANGAN MAJLIS PERTUNANGAN
+          </p>
 
-        <p
-          style={{
-            marginTop: "16px",
-            fontSize: "1rem",
-            color: "#7a5c5c",
-          }}
-        >
-          28 • 12 • 2025
-          <br />
-          Pasir Mas, Kelantan
-        </p>
+          <h1
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "2.3rem",
+              color: "#fff",
+              marginTop: "12px",
+              lineHeight: "1.3",
+              textShadow: "0 3px 12px rgba(0,0,0,0.45)",
+            }}
+          >
+            Farah &<br />Ameerul
+          </h1>
+
+          <p
+            style={{
+              marginTop: "14px",
+              fontSize: "1rem",
+              color: "#fff",
+              textShadow: "0 2px 6px rgba(0,0,0,0.35)",
+            }}
+          >
+            28 • 12 • 2025
+            <br />
+            Pasir Mas, Kelantan
+          </p>
+        </div>
       </motion.div>
     </section>
   );

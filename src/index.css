@@ -532,3 +532,30 @@ body {
   padding-bottom: 130px; /* leaves space for bottom menu */
   -webkit-overflow-scrolling: touch; /* smooth scroll on iOS */
 }
+
+.fixed-viewport-wrapper {
+  position: relative;
+  overflow: hidden; /* keep petals inside your full screen */
+}
+
+
+
+.sakura {
+  position: fixed;
+  top: -10px;
+  pointer-events: none;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(85, 84, 84);
+  border-radius: 50%;
+  will-change: transform;
+  animation: fall 10s linear infinite;
+}
+
+
+
+.sakura {
+  z-index: 9990 !important;  /* shows above everything */
+}
+
+

@@ -13,6 +13,7 @@ import BottomMenu from "./components/BottomMenu.jsx";
 import Modal from "./components/Modal.jsx";
 import ContactModal from "./components/ContactModal.jsx";
 import LocationModal from "./components/LocationModal.jsx";
+import SakuraEffect from "./components/SakuraEffect";
 
 
 export default function App() {
@@ -93,10 +94,15 @@ export default function App() {
 ===================================================== */
 return (
   <div className="fixed-viewport-wrapper">
+  <SakuraEffect />
     <div className="fixed-viewport">
+     
+     
 
       {/* BACKGROUND MUSIC */}
       <BackgroundMusicVideo playAudio={playAudio} />
+
+      
 
       <AnimatePresence mode="wait">
         {!isOpened ? (

@@ -100,7 +100,7 @@ export default function Wishes({ showForm = true, showList = true }) {
                 transition={{ duration: 0.3 }}
                 className="wish-card"
               >
-                <p className="wish-message" style={{ fontFamily: "Montserrat, italic" }}>  “{w.message}”
+                <p className="wish-message" style={{ fontFamily: "Montserrat, serif" }}>  “{w.message}”
 </p>
                 <p className="wish-name" style={{ fontFamily: "Cinzel, serif" }}>  – {w.name}
 </p>
