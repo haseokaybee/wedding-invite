@@ -9,6 +9,8 @@ import Wishes from "./components/Wishes.jsx";
 import BackgroundMusicVideo from "./components/BackgroundMusicVideo.jsx";
 import IntroScreen from "./components/IntroScreen.jsx";
 import InvitationText from "./components/InvitationText.jsx";
+import BottomMenu from "./components/BottomMenu.jsx";
+import Modal from "./components/Modal.jsx";
 
 export default function App() {
   /* =====================================================
@@ -41,6 +43,13 @@ export default function App() {
   }, []);
 
   /* =====================================================
+     MODAL STATES
+  ===================================================== */
+  const [openRSVP, setOpenRSVP] = useState(false);
+  const [openWishes, setOpenWishes] = useState(false);
+  const [openLocation, setOpenLocation] = useState(false);
+
+  /* =====================================================
      RSVP STATE (LOCAL SAFE)
   ===================================================== */
   const [rsvps, setRsvps] = useState(() => {
@@ -63,7 +72,7 @@ export default function App() {
   };
 
   /* =====================================================
-     INTRO SCREEN + MUSIC TRIGGER
+     INTRO + MUSIC
   ===================================================== */
   const [isOpened, setIsOpened] = useState(false);
   const [playAudio, setPlayAudio] = useState(false);
@@ -74,13 +83,12 @@ export default function App() {
   };
 
   /* =====================================================
-     MAIN LAYOUT (LOCKED TO MOBILE VIEW)
+     MAIN LAYOUT
   ===================================================== */
   return (
     <div className="fixed-viewport-wrapper">
       <div className="fixed-viewport">
-
-        {/* Background music (hidden autoplay video) */}
+        
         <BackgroundMusicVideo playAudio={playAudio} />
 
         <AnimatePresence mode="wait">
@@ -109,99 +117,96 @@ export default function App() {
               exit={{ opacity: 0, scale: 1.1 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               style={{
-                width: "100%",             // expand full width
-  maxWidth: "430px",         // safe for iPhone Pro Max
-  minHeight: "844px",
-  overflowY: "auto",
-  padding: "0",              // remove padding
-  position: "relative",
+                width: "100%",
+                maxWidth: "430px",
+                minHeight: "844px",
+                overflowY: "auto",
+                padding: "0",
+                position: "relative",
               }}
             >
-              {/* HERO SECTION */}
+              {/* HERO */}
               <HeroSection />
 
-{/* ASSALAMUALAIKUM CALLIGRAPHY IMAGE */}
-<motion.div
-  initial={{ opacity: 0, y: 10 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.6, ease: "easeOut" }}
-  style={{
-    width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    marginTop: "1px",   // reduced from 20px → 12px
-    marginBottom: "1px", // nicely pulls InvitationText closer
-  }}
->
-  <img
-    src="/salam.png"
-    alt="Assalamualaikum"
-    style={{
-      width: "90%",            // fits beautifully inside 390px
-      maxWidth: "200px",
-      opacity: 0.95,
-    }}
-  />
-</motion.div>
-
-
+              {/* SALAM IMAGE */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "1px",
+                  marginBottom: "1px",
+                }}
+              >
+                <img
+                  src="/salam.png"
+                  alt="Assalamualaikum"
+                  style={{
+                    width: "90%",
+                    maxWidth: "200px",
+                    opacity: 0.95,
+                  }}
+                />
+              </motion.div>
 
               {/* INVITATION PARAGRAPH */}
               <InvitationText />
 
-              {/* COUNTDOWN */}
-            <div style={{ marginTop: "28px", textAlign: "center" }}>
-  <motion.h2
-    initial={{ opacity: 0, y: 10 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6 }}
-    style={{
-      fontFamily: "'Cinzel', serif",
-      fontSize: "1.25rem",
-      letterSpacing: "0.06em",
-      marginBottom: "12px",
-      color: "#6d5959",
-    }}
-  >
-    MENGHITUNG HARI
-  </motion.h2>
-
-  <Countdown targetDate="2025-12-28T08:00:00" />
-              </div>
-
-              {/* RSVP SECTION */}
-              <div style={{ marginTop: "32px" }}>
-                <h2
+              {/* COUNTDOWN + TITLE */}
+              <div style={{ marginTop: "28px", textAlign: "center" }}>
+                <motion.h2
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
                   style={{
-                    textAlign: "center",
-                    fontFamily: "'Playfair Display', serif",
-                    letterSpacing: "0.04em",
+                    fontFamily: "'Cinzel', serif",
+                    fontSize: "1.25rem",
+                    letterSpacing: "0.06em",
+                    marginBottom: "12px",
+                    color: "#6d5959",
                   }}
                 >
-                  RSVP
-                </h2>
-                <RSVPForm onSubmit={handleRsvpSubmit} />
+                  MENGHITUNG HARI
+                </motion.h2>
+
+                <Countdown targetDate="2025-12-28T08:00:00" />
               </div>
 
-              {/* WISHES SECTION */}
-              <div style={{ marginTop: "32px" }}>
-                <h2
-                  style={{
-                    textAlign: "center",
-                    fontFamily: "'Playfair Display', serif",
-                    letterSpacing: "0.04em",
-                  }}
-                >
-                  UCAPAN
-                </h2>
-                <Wishes />
-              </div>
-
-              <div style={{ height: "60px" }}></div>
+              <div style={{ height: "60px" }} />
             </motion.div>
           )}
         </AnimatePresence>
+
+        
+
+        {/* ================ MODALS ================ */}
+        <Modal open={openRSVP} onClose={() => setOpenRSVP(false)}>
+          <h2 className="cinzel" style={{ textAlign: "center" }}>RSVP</h2>
+          <RSVPForm onSubmit={handleRsvpSubmit} />
+        </Modal>
+
+        <Modal open={openWishes} onClose={() => setOpenWishes(false)}>
+          <h2 className="cinzel" style={{ textAlign: "center" }}>Ucapan</h2>
+          <Wishes />
+        </Modal>
+
+        <Modal open={openLocation} onClose={() => setOpenLocation(false)}>
+          <h2 className="cinzel" style={{ textAlign: "center" }}>Lokasi</h2>
+          <p style={{ textAlign: "center" }}>Lokasi akan ditambah kemudian.</p>
+        </Modal>
+
+        {/* ================ BOTTOM MENU ================ */}
+   {isOpened && (
+  <BottomMenu
+    onOpenRSVP={() => setOpenRSVP(true)}
+    onOpenWishes={() => setOpenWishes(true)}
+  />
+)}
+
       </div>
     </div>
   );
