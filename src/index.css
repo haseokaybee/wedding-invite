@@ -1,0 +1,505 @@
+/* src/index.css */
+
+:root {
+  --bg: #fdf7f4;
+  --bg-card: #ffffff;
+  --accent: #d58fa6;
+  --accent-soft: #f5c8dc;
+  --text-main: #3a2a2a;
+  --text-muted: #7a5c5c;
+  --border-soft: #f0d7df;
+  --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.06);
+  --radius-large: 24px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: radial-gradient(circle at top left, #ffeef4, var(--bg));
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.main-container {
+  width: 100%;
+  max-width: 960px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Floating petals */
+.petal {
+  position: fixed;
+  width: 18px;
+  height: 24px;
+  background: radial-gradient(circle at 30% 20%, #fff, #f7b3c8);
+  opacity: 0.6;
+  border-radius: 60% 40% 60% 40%;
+  pointer-events: none;
+  filter: blur(0.2px);
+  animation: floatPetal 18s linear infinite;
+}
+
+.petal-1 {
+  top: -40px;
+  left: 10%;
+  animation-delay: 0s;
+}
+.petal-2 {
+  top: -60px;
+  left: 40%;
+  width: 16px;
+  height: 22px;
+  animation-delay: 4s;
+}
+.petal-3 {
+  top: -80px;
+  left: 70%;
+  width: 20px;
+  height: 26px;
+  animation-delay: 8s;
+}
+.petal-4 {
+  top: -50px;
+  left: 85%;
+  animation-delay: 12s;
+}
+
+@keyframes floatPetal {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(50vh) translateX(30px) rotate(80deg);
+  }
+  100% {
+    transform: translateY(110vh) translateX(-30px) rotate(160deg);
+  }
+}
+
+/* Hero */
+.hero {
+  padding-bottom: 24px;
+}
+
+.hero-card {
+  background: linear-gradient(135deg, #ffeef6, #ffffff);
+  border-radius: 32px;
+  padding: 40px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::before,
+.hero-card::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  border: 1px solid rgba(213, 143, 166, 0.35);
+}
+
+.hero-card::before {
+  width: 220px;
+  height: 220px;
+  top: -80px;
+  left: -60px;
+}
+
+.hero-card::after {
+  width: 260px;
+  height: 260px;
+  bottom: -100px;
+  right: -80px;
+}
+
+.hero-tagline {
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.hero-names {
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: clamp(2.6rem, 6vw, 3.2rem);
+  margin: 16px 0 8px;
+  letter-spacing: 0.08em;
+}
+
+.hero-date {
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+.hero-location {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* Sections */
+.section {
+  margin-top: 24px;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-soft);
+  padding: 24px 20px 26px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.section-title {
+  font-family: "Playfair Display", "Times New Roman", serif;
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section-text {
+  margin: 0 0 18px;
+  text-align: center;
+  font-size: 0.98rem;
+  color: var(--text-muted);
+}
+
+.section-footnote {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Details */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+.detail-heading {
+  margin: 0 0 4px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* Countdown */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.countdown-box {
+  min-width: 70px;
+  padding: 10px 8px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fff8fb, #ffeaf3);
+  border: 1px solid var(--border-soft);
+  text-align: center;
+}
+
+.countdown-value {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.countdown-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.countdown-finished {
+  text-align: center;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* Forms */
+.form {
+  margin-top: 4px;
+}
+
+.form-row {
+  margin-bottom: 12px;
+}
+
+.form-row-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.form-row-inline > label {
+  flex: 1;
+}
+
+label {
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  margin-top: 4px;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  background: #fffdfd;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent-soft);
+  box-shadow: 0 0 0 1px rgba(213, 143, 166, 0.3);
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Buttons */
+.primary-button,
+.secondary-button {
+  border: none;
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, var(--accent), #f2a4bf);
+  color: #ffffff;
+  box-shadow: 0 10px 25px rgba(213, 143, 166, 0.3);
+}
+
+.primary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(213, 143, 166, 0.32);
+}
+
+.secondary-button {
+  background: #fff8fb;
+  color: var(--text-main);
+  border: 1px solid var(--border-soft);
+}
+
+.secondary-button:hover {
+  background: #ffeaf3;
+}
+
+/* Music button (floating) */
+.music-button {
+  position: fixed;
+  right: 16px;
+  bottom: 20px;
+  z-index: 10;
+  border: none;
+  border-radius: 999px;
+  padding: 9px 16px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Form status */
+.form-status {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+/* Wishes */
+.wishes-root {
+  margin-top: 8px;
+}
+
+.wishes-list {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.wish-card {
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: #fff9fd;
+  border: 1px solid var(--border-soft);
+}
+
+.wish-message {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.wish-name {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* Footer */
+.footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .hero-card {
+    padding: 50px 40px;
+  }
+
+  .card {
+    padding: 30px 26px 32px;
+  }
+}
+
+:root {
+  --scale-factor: 1;
+}
+
+/* ==================================
+   GLOBAL ROOT
+================================== */
+:root {
+  --scale-factor: 1; /* JS updates this */
+}
+
+/* ==================================
+   RESET
+================================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #f5ecef;
+  font-family: system-ui, sans-serif;
+
+  /* iOS Safari fix */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* ==================================
+   FIXED MOBILE VIEWPORT SYSTEM
+   390 × 844 (iPhone portrait)
+================================== */
+
+/* Fullscreen wrapper */
+.fixed-viewport-wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: radial-gradient(circle at top, #ffeef4, #fdf7f4);
+  position: relative;
+}
+
+/* MOBILE CANVAS */
+.fixed-viewport {
+  width: 390px !important;
+  height: 844px !important;
+
+  background: white;
+
+  border-radius: 32px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.18);
+
+  position: relative;
+  overflow: hidden;
+
+  transform-origin: center center;
+  transform: scale(var(--scale-factor));
+
+  /* Ensure it's always centered */
+  flex-shrink: 0;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+/* Prevent children from breaking layout */
+.fixed-viewport * {
+  max-width: 390px !important;
+  box-sizing: border-box;
+}
+
+.fixed-viewport::-webkit-scrollbar {
+  width: 0;
+}
