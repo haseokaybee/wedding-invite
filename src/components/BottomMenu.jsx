@@ -6,7 +6,7 @@ import { Heart, MapPin, Mail } from "lucide-react";
 export default function BottomMenu({ onOpenRSVP, onOpenWishes }) {
   const openMap = () => {
     window.open(
-      "https://www.google.com/maps?q=Your+Location+Here",
+      "https://www.google.com/maps?daddr=6.004869,102.098801&saddr",
       "_blank"
     );
   };

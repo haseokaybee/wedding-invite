@@ -213,10 +213,33 @@ return (
   <Wishes showForm={true} showList={false} />
 </Modal>
 
-      <Modal open={openLocation} onClose={() => setOpenLocation(false)}>
-        <h2 className="cinzel" style={{ textAlign: "center" }}>Lokasi</h2>
-        <p style={{ textAlign: "center" }}>Lokasi akan ditambah kemudian.</p>
-      </Modal>
+     <Modal open={openLocation} onClose={() => setOpenLocation(false)}>
+  <h2 className="cinzel" style={{ textAlign: "center" }}>Lokasi</h2>
+
+  <p style={{ textAlign: "center", marginTop: "10px" }}>
+    Tekan butang di bawah untuk membuka lokasi majlis.
+  </p>
+
+  <a
+    href="https://www.google.com/maps?daddr=6.004869,102.098801&saddr"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: "block",
+      margin: "20px auto",
+      width: "80%",
+      padding: "12px",
+      textAlign: "center",
+      background: "linear-gradient(135deg, #d58fa6, #f2a4bf)",
+      color: "white",
+      borderRadius: "12px",
+      textDecoration: "none",
+      fontWeight: "600"
+    }}
+  >
+    📍 Buka Google Maps
+  </a>
+</Modal>
 
       {/* =====================================================
          BOTTOM MENU (only after card opened)
