@@ -12,6 +12,10 @@
   --radius-large: 24px;
 }
 
+.cinzel {
+  font-family: 'Cinzel', serif;
+}
+
 *,
 *::before,
 *::after {

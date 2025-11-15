@@ -8,21 +8,20 @@ import RSVPForm from "./components/RSVPForm.jsx";
 import Wishes from "./components/Wishes.jsx";
 import BackgroundMusicVideo from "./components/BackgroundMusicVideo.jsx";
 import IntroScreen from "./components/IntroScreen.jsx";
+import InvitationText from "./components/InvitationText.jsx";
 
 export default function App() {
   /* =====================================================
-     FIXED MOBILE 390×844 AUTO-SCALING
+     FIXED MOBILE 390×844 AUTO-SCALING (SAFE FOR iPHONE)
   ===================================================== */
-useEffect(() => {
+  useEffect(() => {
     function resize() {
       const baseWidth = 390;
       const baseHeight = 844;
 
-      // iOS Safari viewport fix
       const viewportWidth = window.innerWidth;
       const viewportHeight = window.innerHeight;
 
-      // Calculate scale based on whichever side is smaller
       const scale = Math.min(
         viewportWidth / baseWidth,
         viewportHeight / baseHeight
@@ -75,24 +74,23 @@ useEffect(() => {
   };
 
   /* =====================================================
-     MAIN LAYOUT (LOCKED to MOBILE VIEW)
+     MAIN LAYOUT (LOCKED TO MOBILE VIEW)
   ===================================================== */
   return (
     <div className="fixed-viewport-wrapper">
       <div className="fixed-viewport">
-        
-        {/* Background music (hidden video) */}
+
+        {/* Background music (hidden autoplay video) */}
         <BackgroundMusicVideo playAudio={playAudio} />
 
-        {/* Animated screen transitions */}
         <AnimatePresence mode="wait">
           {!isOpened ? (
-            /* INTRO SCREEN (Zoom out on exit) */
+            /* ================= INTRO SCREEN ================= */
             <motion.div
               key="intro"
               initial={{ opacity: 1, scale: 1 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.3 }}
+              exit={{ opacity: 0, scale: 1.25 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               style={{
                 width: "390px",
@@ -103,7 +101,7 @@ useEffect(() => {
               <IntroScreen onOpen={openInvitation} />
             </motion.div>
           ) : (
-            /* MAIN CARD (Zoom in) */
+            /* ================= MAIN CONTENT ================= */
             <motion.div
               key="main"
               initial={{ opacity: 0, scale: 0.85 }}
@@ -118,15 +116,18 @@ useEffect(() => {
                 position: "relative",
               }}
             >
-              {/* HERO */}
+              {/* HERO SECTION */}
               <HeroSection />
+
+              {/* INVITATION PARAGRAPH */}
+              <InvitationText />
 
               {/* COUNTDOWN */}
               <div style={{ marginTop: "24px" }}>
                 <Countdown targetDate="2025-12-28T08:00:00" />
               </div>
 
-              {/* RSVP */}
+              {/* RSVP SECTION */}
               <div style={{ marginTop: "32px" }}>
                 <h2
                   style={{
@@ -140,7 +141,7 @@ useEffect(() => {
                 <RSVPForm onSubmit={handleRsvpSubmit} />
               </div>
 
-              {/* WISHES */}
+              {/* WISHES SECTION */}
               <div style={{ marginTop: "32px" }}>
                 <h2
                   style={{
@@ -154,11 +155,10 @@ useEffect(() => {
                 <Wishes />
               </div>
 
-              <div style={{ height: "60px" }} />
+              <div style={{ height: "60px" }}></div>
             </motion.div>
           )}
         </AnimatePresence>
-
       </div>
     </div>
   );
