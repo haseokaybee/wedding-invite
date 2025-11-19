@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import HeroSection from "./components/HeroSection.jsx";
-import Countdown from "./components/Countdown.jsx";
 import RSVPForm from "./components/RSVPForm.jsx";
 import Wishes from "./components/Wishes.jsx";
 import BackgroundMusicVideo from "./components/BackgroundMusicVideo.jsx";
@@ -13,10 +12,29 @@ import BottomMenu from "./components/BottomMenu.jsx";
 import Modal from "./components/Modal.jsx";
 import ContactModal from "./components/ContactModal.jsx";
 import LocationModal from "./components/LocationModal.jsx";
-import SakuraEffect from "./components/SakuraEffect";
+import SakuraEffect from "./components/SakuraEffect.jsx";
+import BlessingSection from "./components/BlessingSection.jsx";
+import AnimatedImage from "./components/AnimatedImage.jsx";
+import ScrollFadeIn from "./components/ScrollFadeIn.jsx";
 
 
 export default function App() {
+
+   const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(prev => !prev);
+
+   <div
+      className="main-scroll-area"
+      onClick={toggleMenu}    // ⭐ tap anywhere = toggle menu
+      style={{
+        width: "390px",
+        height: "844px",
+        overflowY: "scroll",
+        margin: "0 auto",
+        position: "relative",
+      }}
+    ></div>
   /* =====================================================
      FIXED MOBILE 390×844 AUTO-SCALING (SAFE FOR iPHONE)
   ===================================================== */
@@ -142,32 +160,12 @@ return (
             <HeroSection />
 
             {/* SALAM IMAGE */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "1px",
-                marginBottom: "1px",
-              }}
-            >
-              <img
-                src="/salam.png"
-                alt="Assalamualaikum"
-                style={{
-                  width: "90%",
-                  maxWidth: "200px",
-                  opacity: 0.95,
-                }}
-              />
-            </motion.div>
+            <AnimatedImage src="/salam.png" alt="Assalamualaikum" width="80%" />
 
             {/* INVITATION PARAGRAPH */}
             <InvitationText />
+
+            <BlessingSection />
 
             {/* COUNTDOWN + TITLE */}
             <div style={{ marginTop: "28px", textAlign: "center" }}>
@@ -183,27 +181,31 @@ return (
                   color: "#6d5959",
                 }}
               >
-                MENGHITUNG HARI
+               
               </motion.h2>
 
-              <Countdown targetDate="2025-12-28T08:00:00" />
+              
             </div>
 
             {/* ⭐ UCAPAN LIST BELOW COUNTDOWN (view only, no form) */}
-            <div style={{ marginTop: "32px" }}>
-              <h2
-                style={{
-                  textAlign: "center",
-                  fontFamily: "'Cinzel', serif",
-                  letterSpacing: "0.04em",
-                }}
-              >
-                Ucapan
-              </h2>
+            <ScrollFadeIn delay={0.2}>
+  <div style={{ marginTop: "32px" }}>
+    <h2
+      style={{
+        textAlign: "center",
+        fontFamily: "'Cinzel', serif",
+        letterSpacing: "0.04em",
+      }}
+    >
+      Ucapan
+    </h2>
 
-              <Wishes showForm={false} />
-            </div>
-
+    {/* ⭐ Wishes list re-animates every time it scrolls into view */}
+    <ScrollFadeIn delay={0.35} y={30}>
+      <Wishes showForm={false} />
+    </ScrollFadeIn>
+  </div>
+</ScrollFadeIn>
             {/* spacing before bottom menu */}
             
           </motion.div>
@@ -262,6 +264,7 @@ return (
       ===================================================== */}
       {isOpened && (
         <BottomMenu
+        
           onOpenRSVP={() => setOpenRSVP(true)}
           onOpenWishes={() => setOpenWishes(true)}
           onOpenLocation={() => setOpenLocation(true)}

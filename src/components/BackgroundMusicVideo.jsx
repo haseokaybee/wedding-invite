@@ -20,7 +20,7 @@ export default function BackgroundMusicVideo({ playAudio }) {
   return (
     <video
       ref={videoRef}
-      src="/scientist.mp4"
+      src="/goldenhour.mp4"
       loop
       playsInline
       preload="auto"

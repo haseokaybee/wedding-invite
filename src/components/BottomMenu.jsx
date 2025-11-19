@@ -30,6 +30,7 @@ export default function BottomMenu({
         padding: "16px 20px",
         borderRadius: "26px",
         boxShadow: "0 12px 32px rgba(0,0,0,0.15)",
+        marginBottom: "10px",
 
         display: "flex",
         justifyContent: "space-around",

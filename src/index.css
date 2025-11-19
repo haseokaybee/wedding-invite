@@ -387,6 +387,7 @@ textarea {
 }
 
 .wish-card {
+  margin-left: 10px;
   padding: 10px 12px;
   border-radius: 16px;
   background: #fff9fd;
@@ -558,4 +559,68 @@ body {
   z-index: 9990 !important;  /* shows above everything */
 }
 
+
+.glitter-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 3; /* BELOW sakura, ABOVE background */
+}
+
+.glitter {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #fff7c9, #d5b76a);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 230, 150, 0.9);
+  animation: glitterFall 4s linear infinite;
+}
+
+@keyframes glitterFall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh) rotate(180deg);
+    opacity: 0;
+  }
+}
+
+.glitter-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.glitter {
+  position: absolute;
+  top: -10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: glitterFall 2.8s linear infinite;
+}
+
+@keyframes glitterFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(120vh) rotate(360deg);
+  }
+}
 

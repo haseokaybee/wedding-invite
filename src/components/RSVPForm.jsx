@@ -60,10 +60,10 @@ export default function RSVPForm() {
       }
 
       if (ok) {
-        setStatus("Thank you! Your RSVP has been recorded 💗");
+        setStatus("Terima Kasih! RSVP Anda telah direkod. 💗");
         setForm({
           name: "",
-          attending: "yes",
+          attending: "Hadir",
           guests: 1,
           message: "",
         });
@@ -85,16 +85,18 @@ export default function RSVPForm() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      style={{ marginTop: "10px" }}
+      style={{ marginTop: "10px" ,
+        fontFamily: "Cinzel",
+      }}
     >
       <label>Nama*</label>
       <input name="name" value={form.name} onChange={update} required />
 
       <label>Kehadiran</label>
       <select name="attending" value={form.attending} onChange={update}>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-        <option value="maybe">Maybe</option>
+        <option value="Hadir">Hadir</option>
+        <option value="Tidak Hadir">Tidak Hadir</option>
+        <option value="Insya-Allah">Insya-Allah</option>
       </select>
 
       <label>Bilangan Ahli Keluarga</label>
